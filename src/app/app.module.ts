@@ -1,33 +1,32 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { StudentComponent } from './student/student.component';
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
-import {BasicAuthHtppInterceptorService} from "./authentication-service/basic-auth-interceptor.service";
-import { LoginComponent } from './login/login.component';
-import {FormsModule} from "@angular/forms";
-import {HeaderComponent} from "./header/header.component";
-import {FooterComponent} from "./footer/footer.component";
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {StudentComponent} from './student/student.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {LoginComponent} from './login/login.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import {HomeComponent} from './home/home.component';
+import {JwtInterceptorService} from "./auth/jwt-interceptor.service";
+import {ErrorInterceptor} from "./auth/error-interceptor";
 
 @NgModule({
   declarations: [
     AppComponent,
     StudentComponent,
-    HeaderComponent,
-    FooterComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [
-    {
-      provide:HTTP_INTERCEPTORS, useClass:BasicAuthHtppInterceptorService, multi:true
-    }
+    {provide:HTTP_INTERCEPTORS, useClass:JwtInterceptorService, multi:true},
+    {provide:HTTP_INTERCEPTORS, useClass:ErrorInterceptor, multi:true},
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
