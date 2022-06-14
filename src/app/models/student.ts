@@ -1,4 +1,4 @@
-import {UserAccount} from "../services/authentication.service";
+import {UserAccount} from "../_services/auth.service";
 import {User} from "./user";
 
 export class Student{

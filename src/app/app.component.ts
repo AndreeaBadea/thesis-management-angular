@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AuthenticationService} from "./services/authentication.service";
+import {AuthService} from "./_services/auth.service";
 import {User} from "./models/user";
 import {Role} from "./models/role";
 
@@ -11,7 +11,7 @@ import {Role} from "./models/role";
 export class AppComponent {
   user: User | undefined;
 
-  constructor(private authenticationService: AuthenticationService) {
+  constructor(private authenticationService: AuthService) {
     this.authenticationService.user.subscribe(x => this.user = x);
   }
 

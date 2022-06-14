@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from "../models/user";
-import {AuthenticationService} from "../services/authentication.service";
-import {UserService} from "../services/user.service";
+import {AuthService} from "../_services/auth.service";
+import {UserService} from "../_services/user.service";
 import {first} from "rxjs/operators";
 
 @Component({
@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   userFromApi: User | undefined;
 
   constructor(private userService: UserService,
-              private authenticationService: AuthenticationService) {
+              private authenticationService: AuthService) {
     this.user = this.authenticationService.userValue;
   }
 

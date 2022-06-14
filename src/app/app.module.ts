@@ -8,8 +8,8 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {LoginComponent} from './login/login.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {HomeComponent} from './home/home.component';
-import {JwtInterceptorService} from "./auth/jwt-interceptor.service";
-import {ErrorInterceptor} from "./auth/error-interceptor";
+import {JwtInterceptorService} from "./_helpers/jwt-interceptor.service";
+import {ErrorInterceptor} from "./_services/error-interceptor";
 
 @NgModule({
   declarations: [

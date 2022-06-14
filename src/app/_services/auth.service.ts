@@ -13,7 +13,7 @@ export class UserAccount{
 @Injectable({
   providedIn: "root"
 })
-export class AuthenticationService {
+export class AuthService {
   private userSubject: BehaviorSubject<User>;
   public user: Observable<User>;
 
@@ -35,6 +35,7 @@ export class AuthenticationService {
       .pipe(map(user => {
           localStorage.setItem("user", JSON.stringify(user));
           this.userSubject.next(user);
+          console.log(user);
           return user;
         })
       );
