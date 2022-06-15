@@ -1,53 +1,38 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import { map } from "rxjs/operators";
-import {BehaviorSubject, Observable} from "rxjs";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Observable} from "rxjs";
 import {Router} from "@angular/router";
-import {environment} from "../../environments/environment";
-import {User} from "../models/user";
 
-export class UserAccount{
-  constructor(public status: string) {}
-}
+const AUTH_API = 'http://localhost:8080';
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
-  private userSubject: BehaviorSubject<User>;
-  public user: Observable<User>;
 
-  constructor(
-    private router: Router,
-    private http: HttpClient
-  ){
-    this.userSubject = new BehaviorSubject<User>(JSON.parse(<string>localStorage.getItem('user')));
-    this.user = this.userSubject.asObservable();
-  }
+  constructor(private router: Router, private http: HttpClient){}
 
-  public get userValue(): User{
-    return this.userSubject.value;
-  }
-
-  authenticate(username: string, password: string){
+  authenticate(username: string, password: string): Observable<any>{
+    console.log(username);
+    console.log(password);
     return this.http
-      .post<any>(`${environment.apiUrl}/users/authenticate`, {username, password})
-      .pipe(map(user => {
-          localStorage.setItem("user", JSON.stringify(user));
-          this.userSubject.next(user);
-          console.log(user);
-          return user;
-        })
-      );
+      .post<any>(AUTH_API + '/users/authenticate', {
+        username,
+        password
+      }, httpOptions);
+    console.log(username);
+    console.log(password);
   }
 
-
-  logOut() {
-    localStorage.removeItem("user");
-    // @ts-ignore
-    this.userSubject.next(null);
-    this.router.navigate(['/users/authenticate']);
+  register(username: string, email: string, password: string): Observable<any> {
+    return this.http.post(AUTH_API + '/users/register', {
+      username,
+      email,
+      password
+    }, httpOptions);
   }
-
 
 }

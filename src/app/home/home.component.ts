@@ -10,21 +10,19 @@ import {first} from "rxjs/operators";
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  loading = false;
-  user: User;
-  userFromApi: User | undefined;
 
-  constructor(private userService: UserService,
-              private authenticationService: AuthService) {
-    this.user = this.authenticationService.userValue;
-  }
+  content?: string;
+
+  constructor(private userService: UserService,) {}
 
   ngOnInit(): void {
-    this.loading = true;
-    this.userService.getById(this.user.idUser).pipe(first()).subscribe(user => {
-      this.loading = false;
-      this.userFromApi = user;
-    });
-
+    this.userService.getPublicContent().subscribe(
+      data => {
+        this.content = data;
+      },
+      err => {
+        this.content = JSON.parse(err.error).message;
+      }
+    );
   }
 }
