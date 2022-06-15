@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
-import {AuthService} from "./_services/auth.service";
-import {User} from "./models/user";
-import {Role} from "./models/role";
+import {Component} from '@angular/core';
+import {TokenStorageService} from "./_services/token-storage.service";
 
 @Component({
   selector: 'app-root',
@@ -9,19 +7,31 @@ import {Role} from "./models/role";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  user: User | undefined;
+  private roles: string[] = [];
+  isLoggedIn = false;
+  showAdminBoard = false;
+  showModeratorBoard = false;
+  username?: string;
+  email?: string
 
-  constructor(private authenticationService: AuthService) {
-    this.authenticationService.user.subscribe(x => this.user = x);
+  constructor(private tokenStorageService: TokenStorageService) {
   }
 
-  get isStudent(){
-    return this.user && this.isUser();
+  ngOnInit(): void {
+    this.isLoggedIn = !!this.tokenStorageService.getToken();
+    if (this.isLoggedIn) {
+      const user = this.tokenStorageService.getUser();
+      this.roles = user.roles;
+      // this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
+      // this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
+      this.username = user.username;
+      this.email = user.email;
+    }
   }
 
-  isUser(){
-    return Object.values<string>(Role).includes('USER');
+  logOut(): void {
+    this.tokenStorageService.signOut();
+    window.location.reload();
   }
-
 
 }

@@ -1,12 +1,32 @@
-<!-- nav -->
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user">
-  <div class="navbar-nav">
-    <a class="nav-item nav-link" routerLink="/">Home</a>
-<!--    <a class="nav-item nav-link" (click)="logOut()">Logout</a>-->
+<div id="app">
+  <nav class="navbar navbar-expand navbar-dark bg-dark">
+    <a href="#" class="navbar-brand">UPB</a>
+    <ul class="navbar-nav mr-auto" routerLinkActive="active">
+      <li class="nav-item">
+        <a href="/home" class="nav-link" routerLink="home">Home </a>
+      </li>
+      <li class="nav-item">
+        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">Profile</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+      <li class="nav-item">
+        <a href="/users/register" class="nav-link" routerLink="users/register">Sign Up</a>
+      </li>
+      <li class="nav-item">
+        <a href="/users/authenticate" class="nav-link" routerLink="users/authenticate">Login</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+      <li class="nav-item">
+        <a href="/profile" class="nav-link" routerLink="profile">{{ email }}</a>
+      </li>
+      <li class="nav-item">
+        <a href class="nav-link" (click)="logOut()">Log Out</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="container">
+    <router-outlet></router-outlet>
   </div>
-</nav>
-
-<!-- main app container -->
-<div class="container">
-  <router-outlet></router-outlet>
 </div>

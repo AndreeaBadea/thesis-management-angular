@@ -1,61 +1,51 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../_services/auth.service";
-
+import {TokenStorageService} from "../_services/token-storage.service";
 
 
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
-  loginForm!: FormGroup;
-  loading = false;
-  submitted = false;
-  error = '';
+  form: any = {
+    username: null,
+    password: null
+  };
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = '';
+  roles: string[] = [];
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private authenticationService: AuthService
-  ) {
-    // redirect to home if already logged in
-    if (this.authenticationService.userValue) {
-      this.router.navigate(['/']);
+  constructor(private authService: AuthService, private tokenStorage: TokenStorageService) {
+  }
+
+  ngOnInit(): void {
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+      this.roles = this.tokenStorage.getUser().roles;
+      console.log("roles" + this.roles);
     }
   }
 
-  ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
-    });
+  onSubmit(): void {
+    const {username, password} = this.form;
+    this.authService.authenticate(username, password).subscribe(
+      data => {
+        console.log("data access token " + data.token);
+        this.tokenStorage.saveToken(data.token); ////
+        console.log("dataa " + data)
+        this.tokenStorage.saveUser(data);
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.roles = this.tokenStorage.getUser().roles;
+       // this.reloadPage();
+      },
+      err => {
+        this.errorMessage = err.error.message;
+        this.isLoginFailed = true;
+      }
+    );
   }
 
-  // convenience getter for easy access to form fields
-  get f() { return this.loginForm.controls; }
-
-  onSubmit() {
-    this.submitted = true;
-
-    // stop here if form is invalid
-    if (this.loginForm.invalid) {
-      return;
-    }
-
-    this.loading = true;
-    this.authenticationService.authenticate(this.f.username.value, this.f.password.value)
-      .pipe(first())
-      .subscribe({
-        next: () => {
-          // get return url from query parameters or default to home page
-          const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-          this.router.navigateByUrl(returnUrl);
-        },
-        error: error => {
-          this.error = error;
-          this.loading = false;
-        }
-      });
+  reloadPage(): void {
+    window.location.reload();
   }
 }
