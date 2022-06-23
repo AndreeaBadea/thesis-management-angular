@@ -12,6 +12,7 @@ import {AuthInterceptor} from "./_helpers/auth.interceptor";
 import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { StudentsListComponent } from './students-list/students-list.component';
+import {TableModule} from "primeng/table";
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { StudentsListComponent } from './students-list/students-list.component';
         HttpClientModule,
         ReactiveFormsModule,
         FormsModule,
+        TableModule
     ],
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true},
