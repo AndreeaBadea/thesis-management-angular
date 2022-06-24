@@ -13,6 +13,9 @@ import { RegisterComponent } from './register/register.component';
 import { ProfileComponent } from './profile/profile.component';
 import { StudentsListComponent } from './students-list/students-list.component';
 import {TableModule} from "primeng/table";
+import {DropdownModule} from "primeng/dropdown";
+import {ButtonModule} from "primeng/button";
+import {TooltipModule} from "primeng/tooltip";
 
 @NgModule({
   declarations: [
@@ -30,7 +33,10 @@ import {TableModule} from "primeng/table";
         HttpClientModule,
         ReactiveFormsModule,
         FormsModule,
-        TableModule
+        TableModule,
+        DropdownModule,
+        ButtonModule,
+        TooltipModule
     ],
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true},

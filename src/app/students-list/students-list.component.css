@@ -1,0 +1,64 @@
+.p-button.p-button-icon-only {
+  height: 2rem;
+  width: 2rem;
+  margin-right: 0.5em;
+}
+
+
+.p-datatable .p-datatable-thead > tr > th {
+  width: inherit !important;
+}
+
+.p-input-icon-left, .p-input-icon-right {
+  position: relative;
+  display: inline-block;
+  float: right;
+}
+
+
+
+/*.box{*/
+/*  position: relative;*/
+/*  display: inline-block;*/
+/*  float: right;*/
+/*  padding:10px;*/
+/*}*/
+
+/*.input {*/
+/*  padding: 10px;*/
+/*  width: 50px;*/
+/*  height: 50px;*/
+/*  background: none;*/
+/*  border: 4px solid black;;*/
+/*  border-radius: 50px;*/
+/*  box-sizing: border-box;*/
+/*  font-family: Comic Sans MS;*/
+/*  font-size: 15px;*/
+/*  color: beige;*/
+/*  outline: none;*/
+/*  transition: .5s;*/
+/*  float: right;*/
+/*}*/
+/*.box:hover input{*/
+/*  width: 350px;*/
+/*  background: #3b3640;*/
+/*  border-radius: 8px;*/
+/*}*/
+/*.box i{*/
+/*  position: absolute;*/
+/*  top: 50%;*/
+/*  right: 15px;*/
+/*  transform: translate(-50%,-50%);*/
+/*  font-size: 26px;*/
+/*  !*color: #ffd52d;*!*/
+/*  color: wheat;*/
+/*  transition: .2s;*/
+/*}*/
+/*.box:hover i{*/
+/*  opacity: 0;*/
+/*  z-index: -1;*/
+/*}*/
+
+/*.pi pi-search{*/
+/*  position:left;*/
+/*}*/

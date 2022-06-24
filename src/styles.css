@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+span{
+  font-family:'primeicons' !important
+}
+
+.width-container{
+  max-width: 1400px !important;
+}

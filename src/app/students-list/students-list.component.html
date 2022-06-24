@@ -1,16 +1,82 @@
-<p-table [value]="students">
-  <ng-template pTemplate="header">
+<p-table #dtSearch
+         [columns]="cols"
+         [value]="students"
+         [responsive]='true'
+         [paginator]="true"
+         [rows]="10"
+         [(first)]="first"
+         [(selection)]="selectedStudents"
+         [resizableColumns]="true"
+         [scrollable]="true"
+         columnResizeMode="expand"
+         styleClass="p-datatable-lg"
+         responsiveLayout="scroll"
+         scrollHeight="480px"
+         dataKey="idStudent"
+         class = "width-container">
+  <ng-template pTemplate="caption">
+    <h2>Students</h2>
+    <div class="ui-helper-clearfix" style="text-align: left">
+      <button type="button" pButton icon="pi pi-file" iconPos="left" pTooltip="CSV" tooltipPosition="bottom" (click)="dt.exportCSV()" ></button>
+      <button type="button" pButton icon="pi pi-file-excel" iconPos="left" pTooltip="EXCEL" tooltipPosition="bottom" (click)="exportExcel()"  class="p-button-success"></button>
+      <button type="button" pButton icon="pi pi-file-pdf" iconPos="left" pTooltip="PDF" tooltipPosition="bottom" (click)="exportPdf()" class="p-button-warning"></button>
+
+        <span class="p-input-icon-right ">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dtSearch.filterGlobal($any($event.target).value, 'contains')" placeholder="Search keyword" />
+                </span>
+
+
+<!--      <span  class="box" name="search">-->
+<!--&lt;!&ndash;                    <i class="pi pi-search"></i>&ndash;&gt;-->
+<!--                    <input pInputText type="text"  class="input" name="txt" onmouseout="this.value = ''; this.blur();" (input)="dtSearch.filterGlobal($any($event.target).value, 'contains')" placeholder="Search keyword" />-->
+<!--      </span>-->
+<!--      <i class="fas fa-search"></i>-->
+
+      </div>
+<!--    </div>-->
+<!--    <div style="text-align: right">-->
+<!--      <i class="pi pi-search" style="margin:4px 4px 0 0"></i>-->
+<!--      <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($any($event.target).value, 'contains')" style="width:auto">-->
+<!--    </div>-->
+
+<!--    <div class="flex">-->
+<!--                <span class="p-input-icon-left ml-auto">-->
+<!--                    <i class="pi pi-search"></i>-->
+<!--                    <input pInputText type="text" (input)="dt2.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />-->
+<!--                </span>-->
+<!--    </div>-->
+
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
     <tr>
-      <th>ID</th>
-      <th>First Name</th>
-      <th>Last Name</th>
+      <th style="width: 2.25em">
+        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+      </th>
+      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+        {{col.header}}
+        <p-sortIcon [field]="col.field"></p-sortIcon>
+      </th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-student>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
     <tr>
-      <td>{{student.idStudent}}</td>
-      <td>{{student.firstName}}</td>
-      <td>{{student.lastName}}</td>
+      <td>
+        <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+      </td>
+      <td *ngFor="let col of columns">
+        {{rowData[col.field]}}
+      </td>
     </tr>
   </ng-template>
+  <ng-template pTemplate="paginatorleft" let-state>
+<!--    {{state.first}}-->
+<!--    <button type="button" pButton icon="pi-refresh"></button>-->
+  </ng-template>
+
+  <ng-template let-item pTemplate="paginatordropdownitem">
+    Showing {{item.value}} per page.
+  </ng-template>
+
+
 </p-table>
