@@ -7,6 +7,7 @@ import {ProfileComponent} from "./profile/profile.component";
 import {RegisterComponent} from "./register/register.component";
 import {StudentsListComponent} from "./students-list/students-list.component";
 import {ProjectsListComponent} from "./projects-list/projects-list.component";
+import {TeacherProfileComponent} from "./teacher-profile/teacher-profile.component";
 
 const routes: Routes = [
   {
@@ -40,6 +41,11 @@ const routes: Routes = [
   {
     path:'projects-list',
     component: ProjectsListComponent,
+    // canActivate: [AuthGuardService]
+  },
+  {
+    path:'teacher-profile',
+    component: TeacherProfileComponent,
     // canActivate: [AuthGuardService]
   },
   { path: '**',

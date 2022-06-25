@@ -30,3 +30,7 @@ label {
   -webkit-border-radius: 50%;
   border-radius: 50%;
 }
+
+body{
+  background-image: url("src/app/images/login-page.jpg");
+}

@@ -17,6 +17,9 @@ import {DropdownModule} from "primeng/dropdown";
 import {ButtonModule} from "primeng/button";
 import {TooltipModule} from "primeng/tooltip";
 import { ProjectsListComponent } from './projects-list/projects-list.component';
+import { TeacherProfileComponent } from './teacher-profile/teacher-profile.component';
+import {MatGridListModule} from "@angular/material/grid-list";
+import {MatCardModule} from "@angular/material/card";
 
 @NgModule({
   declarations: [
@@ -27,7 +30,8 @@ import { ProjectsListComponent } from './projects-list/projects-list.component';
     RegisterComponent,
     ProfileComponent,
     StudentsListComponent,
-    ProjectsListComponent
+    ProjectsListComponent,
+    TeacherProfileComponent
   ],
     imports: [
         BrowserModule,
@@ -38,7 +42,9 @@ import { ProjectsListComponent } from './projects-list/projects-list.component';
         TableModule,
         DropdownModule,
         ButtonModule,
-        TooltipModule
+        TooltipModule,
+        MatGridListModule,
+        MatCardModule
     ],
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true},

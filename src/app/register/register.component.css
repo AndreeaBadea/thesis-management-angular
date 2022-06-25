@@ -1,3 +1,18 @@
+body, html {
+  height: 100%;
+}
+
+.bg {
+  background-image: url("../images/login-page.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width:100% !important;
+  position: absolute;
+  top: 56px;
+  left: 0;
+}
+
 label {
   display: block;
   margin-top: 10px;
