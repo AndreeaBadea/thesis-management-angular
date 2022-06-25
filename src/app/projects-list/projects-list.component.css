@@ -1,0 +1,19 @@
+.p-button.p-button-icon-only {
+  height: 2rem;
+  width: 2rem;
+  margin-right: 0.5em;
+}
+
+
+.p-datatable .p-datatable-thead > tr > th {
+  width: inherit !important;
+}
+
+.p-input-icon-left, .p-input-icon-right {
+  position: relative;
+  display: inline-block;
+  float: right;
+}
+
+
+

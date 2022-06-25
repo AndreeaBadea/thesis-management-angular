@@ -16,6 +16,7 @@ import {TableModule} from "primeng/table";
 import {DropdownModule} from "primeng/dropdown";
 import {ButtonModule} from "primeng/button";
 import {TooltipModule} from "primeng/tooltip";
+import { ProjectsListComponent } from './projects-list/projects-list.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {TooltipModule} from "primeng/tooltip";
     HomeComponent,
     RegisterComponent,
     ProfileComponent,
-    StudentsListComponent
+    StudentsListComponent,
+    ProjectsListComponent
   ],
     imports: [
         BrowserModule,

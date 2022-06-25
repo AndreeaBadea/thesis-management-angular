@@ -1,0 +1,58 @@
+<p-table #dtSearch
+         [columns]="cols"
+         [value]="projects"
+         [responsive]='true'
+         [paginator]="true"
+         [rows]="10"
+         [(selection)]="selectedProject"
+         [resizableColumns]="true"
+         [scrollable]="true"
+         columnResizeMode="expand"
+         styleClass="p-datatable-lg"
+         responsiveLayout="scroll"
+         scrollHeight="480px"
+         dataKey="idProject"
+         class = "width-container">
+  <ng-template pTemplate="caption">
+    <h2>Projects</h2>
+    <div class="ui-helper-clearfix" style="text-align: left">
+      <button type="button" pButton icon="pi pi-file" iconPos="left" pTooltip="CSV" tooltipPosition="bottom" (click)="dt.exportCSV()" ></button>
+      <button type="button" pButton icon="pi pi-file-excel" iconPos="left" pTooltip="EXCEL" tooltipPosition="bottom" (click)="exportExcel()"  class="p-button-success"></button>
+      <button type="button" pButton icon="pi pi-file-pdf" iconPos="left" pTooltip="PDF" tooltipPosition="bottom" (click)="exportPdf()" class="p-button-warning"></button>
+
+      <span class="p-input-icon-right ">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dtSearch.filterGlobal($any($event.target).value, 'contains')" placeholder="Search keyword" />
+                </span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th style="width: 2.25em">
+        <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+      </th>
+      <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+        {{col.header}}
+        <p-sortIcon [field]="col.field"></p-sortIcon>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr>
+      <td>
+        <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+      </td>
+      <td *ngFor="let col of columns">
+        {{rowData[col.field]}}
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="paginatorleft" let-state>
+  </ng-template>
+
+  <ng-template let-item pTemplate="paginatordropdownitem">
+    Showing {{item.value}} per page.
+  </ng-template>
+
+
+</p-table>
