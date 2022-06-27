@@ -29,11 +29,18 @@
     <md-card-header>
       <!--Avatar-->
       <md-card-avatar>
-        <img src="src/app/images/female-student.jpg" class="md-user-avatar"/>
+        <img src="../../images/female-student.jpg" class="md-user-avatar"/>
       </md-card-avatar>
     </md-card-header>
-    <img src="src/app/images/female-student.jpg" class="md-card-image" alt="Card Image">
+    <img src="../../images/female-student.jpg" class="md-card-image" alt="Card Image">
   </mat-grid-list>
+
+  <p-timeline [value]="events" align="right">
+    <ng-template pTemplate="content" let-event>
+      {{event.status}}
+    </ng-template>
+  </p-timeline>
+
 
 
 </div>

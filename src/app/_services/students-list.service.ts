@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
-import {Student} from "../models/student";
 import {HttpClient} from "@angular/common/http";
+import {StudentList} from "../models/student-list";
 
 @Injectable({
   providedIn: 'root'
 })
-export class StudentService {
+export class StudentsListService {
   private AUTH_API = "http://localhost:8080"
 
 
-  private STUDENTS: Student[] = [
+  private STUDENTS: StudentList[] = [
     {"idStudent": 1,
       "firstName": "Andreea",
       "lastName": "Badea",
@@ -128,7 +128,7 @@ export class StudentService {
   //   return this.http.get<Student[]>(this.AUTH_API + '/students');
   // }
 
-  public getAllStudents() : Student[]{
+  public getAllStudents() : StudentList[]{
     return this.STUDENTS;
   }
 

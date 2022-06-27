@@ -1,18 +1,13 @@
-import {User} from "./user";
 
-export class Student{
-  // idStudent!: number;
-  // user!: User;
-  // firstName!: string;
-  // lastName!: string;
-  // cnp!: string;
+export class Student {
 
-  idStudent!: number;
-  firstName!: string;
-  lastName!: string;
-  email!: string;
-  facultyDomain!: string;
-  classroom!: string;
-  coordinatingTeacher!: string;
-  thesisStatus!: string;
+// idStudent!: number;
+idUserAccount!: number;
+firstName!: string;
+lastName!: string;
+cnp!: string;
+faculty!: string;
+facultyDomain!: string;
+classroom!: string;
+
 }

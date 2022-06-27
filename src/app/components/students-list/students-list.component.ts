@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {StudentService} from "../_services/student.service";
-import {Student} from "../models/student";
+import {StudentsListService} from "../../_services/students-list.service";
 import {SortEvent} from "primeng/api";
 import {Table} from "primeng/table";
+import {StudentList} from "../../models/student-list";
 
 @Component({
   selector: 'app-students-list',
@@ -11,16 +11,16 @@ import {Table} from "primeng/table";
 })
 
 export class StudentsListComponent implements OnInit {
-  students!: Student[];
+  students!: StudentList[];
   cols! : any[];
   first: number = 0;
-  selectedStudents!: Student[];
+  selectedStudents!: StudentList[];
   columns!: any[];
   dt: any;
   dtSearch: any;
 
 
-  constructor(private studentService: StudentService) {
+  constructor(private studentService: StudentsListService) {
 
   }
 

@@ -1,0 +1,112 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register</title>
+  <!--Made with love by Mutiullah Samim -->
+
+  <!--Bootsrap 4 CDN-->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <!--Fontawesome CDN-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+</head>
+<body class = "bg">
+<div class="container">
+  <div class="d-flex justify-content-center h-100">
+    <div class="card">
+      <div class="card-header">
+        <h3>Add additional informations</h3>
+        <p>*Please complete the form with your personal informations. </p>
+        <div class="card-body">
+
+<form [formGroup]="userDetailsForm" (ngSubmit)="onSubmit()" xmlns="http://www.w3.org/1999/html">
+  <div class="input-group form-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fas fa-user"></i></span>
+    </div>
+        <input formControlName="firstName" placeholder="First name">
+
+    <div *ngIf="userDetailsForm.get('firstName')?.invalid && (userDetailsForm.get('firstName')?.dirty || userDetailsForm.get('firstName')?.touched)">
+      <div class="alert-danger">
+    *Please provide your first name.
+      </div>
+    </div>
+  </div>
+
+  <div class="input-group form-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fas fa-user"></i></span>
+    </div>
+      <input formControlName="lastName" placeholder="Last name">
+    <div *ngIf="userDetailsForm.get('lastName')?.invalid && (userDetailsForm.get('lastName')?.dirty || userDetailsForm.get('lastName')?.touched)">
+      <div class="alert-danger">
+    *Please provide your last name.
+      </div>
+    </div>
+  </div>
+
+  <div class="input-group form-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fas fa-id-card "></i></span>
+    </div>
+      <input formControlName="cnp" placeholder="CNP">
+    <div *ngIf="userDetailsForm.get('cnp')?.invalid && (userDetailsForm.get('cnp')?.dirty || userDetailsForm.get('cnp')?.touched)">
+      <div class="alert-danger">
+    *CNP must be exactly 13 characters long.
+      </div>
+    </div>
+  </div>
+
+  <div class="input-group form-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fas fa-university"></i></span>
+    </div>
+      <input formControlName="faculty" placeholder="Faculty">
+    <div *ngIf="userDetailsForm.get('faculty')?.invalid && (userDetailsForm.get('faculty')?.dirty || userDetailsForm.get('faculty')?.touched)">
+      <div class="alert-danger">
+    *Please provide faculty name.
+      </div>
+    </div>
+  </div>
+
+  <div class="input-group form-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fas fa-graduation-cap"></i></span>
+    </div>
+      <input formControlName="facultyDomain" placeholder="Faculty Domain">
+    <div *ngIf="userDetailsForm.get('facultyDomain')?.invalid && (userDetailsForm.get('facultyDomain')?.dirty || userDetailsForm.get('facultyDomain')?.touched)">
+      <div class="alert-danger">
+    *Please provide your faculty domain name.
+      </div>
+    </div>
+  </div>
+
+
+  <div class="input-group form-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"><i class="fas fa-book"></i></span>
+    </div>
+      <input formControlName="classroom" placeholder="Classroom">
+    <div *ngIf="userDetailsForm.get('classroom')?.invalid && (userDetailsForm.get('classroom')?.dirty || userDetailsForm.get('classroom')?.touched)">
+      <div class="alert-danger">
+    *Please provide your classroom.
+      </div>
+    </div>
+  </div>
+  <button type="submit"
+          class = "save-btn"
+          [disabled]="userDetailsForm?.invalid">
+          Save
+         </button>
+</form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
