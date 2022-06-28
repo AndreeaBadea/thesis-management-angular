@@ -8,6 +8,7 @@ import {StudentsListComponent} from "./components/students-list/students-list.co
 import {ProjectsListComponent} from "./components/projects-list/projects-list.component";
 import {TeacherProfileComponent} from "./components/teacher-profile/teacher-profile.component";
 import {UserDetailsFormComponent} from "./components/user-details-form/user-details-form.component";
+import {AdminDashboardComponent} from "./components/admin-dashboard/admin-dashboard.component";
 
 const routes: Routes = [
   {
@@ -50,6 +51,12 @@ const routes: Routes = [
   {
     path:'students/:idUserAccount',
     component: UserDetailsFormComponent,
+
+    // canActivate: [AuthGuardService]
+  },
+  {
+    path:'admin',
+    component: AdminDashboardComponent,
 
     // canActivate: [AuthGuardService]
   },

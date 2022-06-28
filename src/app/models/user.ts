@@ -7,4 +7,5 @@ export class User{
   email!: string;
   token: string | undefined;
   roles: Role[] | undefined;
+  firstLoginFlag: number = 1;
 }

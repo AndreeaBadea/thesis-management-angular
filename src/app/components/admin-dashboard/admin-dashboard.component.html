@@ -1,1 +1,124 @@
-<p>admin-dashboard works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+    crossorigin="anonymous"
+  />
+  <title>Dashboard</title>
+</head>
+<body id="body">
+<div class="container">
+
+
+  <main>
+    <div class="main__container">
+      <!-- MAIN TITLE STARTS HERE -->
+
+      <div class="main__title">
+        <img src="assets/hello.svg" alt="" />
+        <div class="main__greeting">
+          <h1>Hello,</h1>
+          <p>Welcome to your admin dashboard!</p>
+        </div>
+      </div>
+      <!-- MAIN TITLE ENDS HERE -->
+
+      <!-- MAIN CARDS STARTS HERE -->
+      <div class="main__cards">
+
+        <div class="card">
+          <i
+            class="fa fa-users fa-2x text-lightblue"
+            aria-hidden="true"
+          ></i>
+          <div class="card_inner">
+            <p class="text-primary-p">Registered Students</p>
+            <span class="font-bold text-title">578</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <i class="fa fa-users fa-2x text-red" aria-hidden="true"></i>
+          <div class="card_inner">
+            <p class="text-primary-p">Registered Teachers</p>
+            <span class="font-bold text-title">2467</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <i
+            class="fa fa-file-text-o fa-2x text-yellow"
+            aria-hidden="true"
+          ></i>
+          <div class="card_inner">
+            <p class="text-primary-p">Thesis Proposed</p>
+            <span class="font-bold text-title">340</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <i
+            class="fa fa-check fa-2x text-green"
+            aria-hidden="true"
+          ></i>
+          <div class="card_inner">
+            <p class="text-primary-p">Allocated Thesis</p>
+            <span class="font-bold text-title">645</span>
+          </div>
+        </div>
+      </div>
+      <!-- MAIN CARDS ENDS HERE -->
+
+      <!-- CHARTS STARTS HERE -->
+      <div class="charts">
+        <div class="charts__left">
+          <div class="charts__left__title">
+            <div>
+              <h1>Manage Accounts</h1>
+              <p>From here you can create new accounts, edit existing or delete.</p>
+              <br>
+              <button type="button" class="button">
+                <span class="button__text">Show user accounts table</span>
+                <span class="button__icon">
+                <ion-icon name="open-outline"></ion-icon>
+                </span>
+              </button>
+              <script src="assets/open-outline.svg"></script>
+
+
+                <div>  <button pButton type="button" label=" Show students table " class="p-button-info"></button> </div>
+                 <div> <button pButton type="button" label=" Show teachers table " class="p-button-warning"></button> </div>
+
+            </div>
+            <i class="fa fa-cogs" aria-hidden="true"></i>
+          </div>
+          <div id="apex1"></div>
+        </div>
+
+        <div class="charts__right">
+          <div class="charts__right__title">
+            <div>
+              <h1>Stats Reports</h1>
+              <p></p>
+            </div>
+            <i class="fa fa-usd" aria-hidden="true"></i>
+          </div>
+
+          <div class="charts__right__cards">
+
+          </div>
+        </div>
+      </div>
+      <!-- CHARTS ENDS HERE -->
+    </div>
+  </main>
+  </div>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+</body>
+</html>

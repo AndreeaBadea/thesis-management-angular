@@ -50,7 +50,7 @@ export class UserDetailsFormComponent implements OnInit {
       lastName: this.userDetailsForm.value.lastName,
       cnp: this.userDetailsForm.value.cnp,
       faculty: this.userDetailsForm.value.faculty,
-      facultyDomain: this.userDetailsForm.value.faculty,
+      facultyDomain: this.userDetailsForm.value.facultyDomain,
       classroom: this.userDetailsForm.value.classroom
     }
     console.log(this.student);

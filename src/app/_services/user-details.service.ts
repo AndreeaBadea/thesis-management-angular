@@ -5,8 +5,10 @@ import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Student} from "../models/student";
 
-const API_URL = 'https://localhost:8080/';
-
+const API_URL = 'http://localhost:8080/';
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 
 
@@ -19,9 +21,9 @@ export class UserDetailsService {
 
   saveStudent(idUserAccount: number, student: Student): Observable<any> {
     const body = JSON.stringify(student);
-    const headers = {'Content-Type': 'application/json'}
+    // const headers = {'Content-Type': 'application/json'}
    // const params = new HttpParams().set('id', idUserAccount);
-    return this.http.post(API_URL + 'students/' + idUserAccount, body);
+    return this.http.post(API_URL + `students/${idUserAccount}`, body, httpOptions);
 
   }
 }

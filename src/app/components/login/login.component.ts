@@ -38,18 +38,20 @@ export class LoginComponent implements OnInit {
     const {username, password} = this.form;
     this.authService.authenticate(username, password).subscribe(
       data => {
-        this.tokenStorage.saveToken(data.token); ////
+        this.tokenStorage.saveToken(data.token);
         this.tokenStorage.saveUser(data);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
         const idUserAccount  = this.tokenStorage.getUser().idUserAccount;
-        console.log("idUserAccount" + idUserAccount);
-        // this.reloadPage();
-        if(this.isUserStudent(this.roles)){
-          console.log("aaaaaaaaaaaaaaaa");
+        var firstLoginFlag = data.firstLoginFlag;
+        console.log("aaaa" + firstLoginFlag);
+        if(this.isUserStudent(this.roles) && firstLoginFlag === 1){
           this.router.navigate(['/students', idUserAccount]);
-          console.log("aaaaaaassaaaaaaaaa");
+           this.tokenStorage.getUser().firstLoginFlag = 0;
+        }else {
+         // this.reloadPage();
+          this.router.navigate(['/students-list']);
         }
       },
       err => {
@@ -60,10 +62,10 @@ export class LoginComponent implements OnInit {
   }
 
     isUserStudent(roles : any): boolean{
-    if(this.roles.includes("ROLE_USER")){
-      return true;
-    }
-    return false;
+      if(this.roles.includes("ROLE_USER")){
+         return true;
+      }
+      return false;
   }
 
   isUserTeacher(roles : any): boolean{

@@ -73,3 +73,9 @@ input:focus{
 .links a{
   margin-left: 4px;
 }
+
+.button{
+  height: 60px;
+  width: 100%;
+
+}

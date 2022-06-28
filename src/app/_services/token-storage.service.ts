@@ -29,7 +29,7 @@ export class TokenStorageService{
   public saveUser(user: any): void{
     window.localStorage.removeItem(USER_KEY);
     window.localStorage.setItem(USER_KEY, JSON.stringify(user));
-    console.log(user);
+    console.log("Save user in local storage " + user);
   }
 
   public getUser(): any {
