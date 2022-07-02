@@ -9,6 +9,7 @@ import {ProjectsListComponent} from "./components/projects-list/projects-list.co
 import {TeacherProfileComponent} from "./components/teacher-profile/teacher-profile.component";
 import {UserDetailsFormComponent} from "./components/user-details-form/user-details-form.component";
 import {AdminDashboardComponent} from "./components/admin-dashboard/admin-dashboard.component";
+import {StudentProfileComponent} from "./components/student-profile/student-profile.component";
 
 const routes: Routes = [
   {
@@ -57,8 +58,10 @@ const routes: Routes = [
   {
     path:'admin',
     component: AdminDashboardComponent,
-
-    // canActivate: [AuthGuardService]
+  },
+  {
+    path:'teacher-profile',
+    component: TeacherProfileComponent,
   },
   { path: '**',
     redirectTo: 'home',

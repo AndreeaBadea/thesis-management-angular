@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
 import {Project} from "../models/project";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Observable} from "rxjs";
+import {map} from "rxjs/operators";
+
+const API_URL = 'http://localhost:8080/';
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -41,4 +48,22 @@ export class ProjectService {
   public getAllProjects() : Project[]{
     return this.PROJECTS;
   }
+
+  public getAllTeacherProjects(idTeacher: number): Observable<Project[]> {
+    return this.http
+      .get(API_URL + `teachers/${idTeacher}/projects` )
+      .pipe<Project[]>(map((data : any) => data.projects))
+  }
+
+  public addTeacherProject(idTeacher:number, project: Project): Observable<Project>{
+    const body = JSON.stringify(project);
+    return this.http.post<Project>(API_URL + `teachers/${idTeacher}/project`, body, httpOptions);
+  }
+
+  public updateTeacherProjects(idTeacher:number, idProject:number, project: Project): Observable<Project>{
+    const body = JSON.stringify(project);
+    return this.http.put<Project>(API_URL + `teachers/${idTeacher}/projects/${idProject}`, body, httpOptions)
+
+  }
+
 }

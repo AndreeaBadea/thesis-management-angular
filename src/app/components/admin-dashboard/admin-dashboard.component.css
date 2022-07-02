@@ -268,6 +268,7 @@ main {
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
+  width: 300px;
 }
 
 .button:hover {
@@ -282,7 +283,7 @@ main {
 .button__icon {
   display: inline-flex;
   align-items: center;
-  padding: 0 24px;
+  padding: 0 40px;
   color: #fff;
   height: 100%;
 }

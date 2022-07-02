@@ -6,4 +6,9 @@ export class Project{
   teacherName!: string;
   projectAvailability!: string;
 
+
+
+  constructor(){
+
+  }
 }

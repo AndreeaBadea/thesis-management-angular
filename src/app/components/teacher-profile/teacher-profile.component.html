@@ -1,49 +1,201 @@
-<!--<div class="container">-->
-<!--  <div class="row no-gutters">-->
-<!--    <div class="col-12 col-sm-6 col-md-8">.col-12 .col-sm-6 .col-md-8</div>-->
-<!--    <mat-card class="card">-->
-<!--      <mat-card-header>-->
-<!--        <div mat-card-avatar>-->
-<!--        </div>-->
-<!--          <mat-card-title>Andreea Badea</mat-card-title>-->
-<!--      </mat-card-header>-->
-<!--      <mat-card-content>-->
-<!--        <p> Student</p>-->
-<!--      </mat-card-content>-->
-<!--    </mat-card>-->
-<!--    <div class="col-6 col-md-4">.col-6 .col-md-4</div>-->
-<!--</div>-->
-<!--</div>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+    crossorigin="anonymous"
+  />
+  <title>Profile</title>
+</head>
+<body id="body">
 
-<div class = "container">
-  <mat-grid-list cols="3" rowHeight="280px" >
-    <mat-grid-tile
-      *ngFor="let tile of tiles"
-      [colspan]="tile.cols"
-      [rowspan]="tile.rows">
-<!--      [style.background]="tile.color"-->
+<div class="container">
+  <main>
+    <div class="main__cards">
+      <!-- CHARTS STARTS HERE -->
+      <div class="charts">
+        <div class="charts__left">
+          <div class="charts__left__title">
+            <div>
+              <h1>Your Profile</h1>
+              <br>
+            </div>
+          </div>
+        </div>
 
-      {{tile.text}}
-    </mat-grid-tile>
+        <div class="charts__right">
+          <div class="charts__right__title">
+            <div>
+              <h1>Proposed Thesis</h1>
+              <p-toolbar styleClass="p-mb-4">
+                <ng-template pTemplate="left">
+                  <button pButton pRipple label="Add" icon="pi pi-plus" class="p-button-success p-mr-2" (click) = open(content)></button>
+                  <button pButton pRipple label="Delete Selected" icon="pi pi-trash" class="p-button-danger" ></button>
+                </ng-template>
+              </p-toolbar>
 
-    <md-card-header>
-      <!--Avatar-->
-      <md-card-avatar>
-        <img src="../../images/female-student.jpg" class="md-user-avatar"/>
-      </md-card-avatar>
-    </md-card-header>
-    <img src="../../images/female-student.jpg" class="md-card-image" alt="Card Image">
-  </mat-grid-list>
-
-  <p-timeline [value]="events" align="right">
-    <ng-template pTemplate="content" let-event>
-      {{event.status}}
-    </ng-template>
-  </p-timeline>
+              <p-table #dt [columns] = "cols" [value]="projects" [rows]="10" [paginator]="true" [globalFilterFields]="['title','status']"
+                       [(selection)]="selectedProjects" [rowHover]="true" dataKey="idProject"
+                       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
 
 
+                <ng-template pTemplate="header" let-columns>
+                  <tr>
+                    <th style="width: 2.25em">
+                      <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
+                    <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                      {{col.header}}
+                      <p-sortIcon [field]="col.field"></p-sortIcon>
+                    </th>
+                    <th>Action</th>
+                  </tr>
+                </ng-template>
 
+
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                  <tr>
+                    <td>
+                      <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                    </td>
+                    <td *ngFor="let col of columns">
+                      {{rowData[col.field]}}
+                    </td>
+                    <td>
+                      <button pButton pRipple icon="pi pi-pencil"class="p-button-rounded p-button-success p-mr-2" (click)="openEdit(contentEdit, rowData)"></button>
+                      <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click) = "openDelete(contentDelete, rowData)"></button>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+
+
+            <ng-template #content let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">New Project</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+                  <div class="form-group">
+                    <label for="projectTitle">Title</label>
+                    <div class="input-group">
+                      <input id="projectTitle" name="projectTitle" class="form-control" ngModel>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="projectDescription">Description</label>
+                    <div class="input-group">
+                      <input id="projectDescription" name="projectDescription" class="form-control" ngModel>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="projectAvailability">Status</label>
+                    <div class="input-group">
+                      <select id="projectAvailability" name="projectAvailability" class="form-control" ngModel>
+                        <option value="available">AVAILABLE</option>
+                        <option value="allocated">ALLOCATED</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="border text-center">
+                    <button data-dismiss="modal" class="btn btn-info">Submit</button>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+              </div>
+            </ng-template>
+
+
+
+            <ng-template #contentEdit let-modal>
+              <div class="modal-header">
+                <h4 class="modalEdit-title" id="modalEdit-basic-title">Edit Project</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
+              <div class="modal-body">
+                <form [formGroup]="editForm" novalidate>
+                  <div class="form-group">
+                    <label>Id</label>
+                    <div class="input-group">
+                      <input formControlName="idProject" class="form-control">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="projectTitle">Title</label>
+                    <div class="input-group">
+                      <input formControlName="projectTitle" class="form-control">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="projectDescription">Description</label>
+                    <div class="input-group">
+                      <input formControlName="projectDescription" class="form-control">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="projectAvailability">Status</label>
+                    <div class="input-group">
+                      <select formControlName="projectAvailability" class="form-control">
+                        <option value="available">AVAILABLE</option>
+                        <option value="allocated">ALLOCATED</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="border text-center">
+                    <button data-dismiss="modal" class="btn btn-info" (click)=onSave()>Save Changes</button>
+                  </div>
+                </form>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+              </div>
+            </ng-template>
+
+            <ng-template #contentDelete let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title">Confirm Delete</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <h2>Are you sure you want to delete this record?</h2>
+                <div class="border text-center">
+                  <button data-dismiss="modal" class="btn btn-danger" (click)="onDelete()">Yes</button>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+              </div>
+            </ng-template>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 </div>
-
-
+</body>
+</html>
 

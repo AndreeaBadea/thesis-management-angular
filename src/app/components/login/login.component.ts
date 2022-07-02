@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../_services/auth.service";
 import {TokenStorageService} from "../../_services/token-storage.service";
 import {StudentsListService} from "../../_services/students-list.service";
-import {Router, RouterModule} from "@angular/router";
+import {Router} from "@angular/router";
 
 
 @Component({

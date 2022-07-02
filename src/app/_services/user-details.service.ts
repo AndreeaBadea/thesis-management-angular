@@ -21,9 +21,7 @@ export class UserDetailsService {
 
   saveStudent(idUserAccount: number, student: Student): Observable<any> {
     const body = JSON.stringify(student);
-    // const headers = {'Content-Type': 'application/json'}
-   // const params = new HttpParams().set('id', idUserAccount);
     return this.http.post(API_URL + `students/${idUserAccount}`, body, httpOptions);
-
   }
+
 }

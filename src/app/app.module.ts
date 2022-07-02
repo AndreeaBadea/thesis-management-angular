@@ -16,13 +16,23 @@ import {DropdownModule} from "primeng/dropdown";
 import {ButtonModule} from "primeng/button";
 import {TooltipModule} from "primeng/tooltip";
 import { ProjectsListComponent } from './components/projects-list/projects-list.component';
-import { TeacherProfileComponent } from './components/teacher-profile/teacher-profile.component';
+
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatCardModule} from "@angular/material/card";
 import { UserDetailsFormComponent } from './components/user-details-form/user-details-form.component';
 import { StudentProfileComponent } from './components/student-profile/student-profile.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import {TimelineModule} from "primeng/timeline";
+import {ProgressBarModule} from "primeng/progressbar";
+import {MatTableModule} from "@angular/material/table";
+import {TeacherProfileComponent} from "./components/teacher-profile/teacher-profile.component";
+import {ToolbarModule} from "primeng/toolbar";
+import {FileUploadModule} from "primeng/fileupload";
+import {RippleModule} from "primeng/ripple";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {ConfirmationService, MessageService} from "primeng/api";
+import {MatDialogModule} from "@angular/material/dialog";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -51,9 +61,18 @@ import {TimelineModule} from "primeng/timeline";
     MatGridListModule,
     MatCardModule,
     TimelineModule,
+    ProgressBarModule,
+    MatTableModule,
+    ToolbarModule,
+    RippleModule,
+    ConfirmDialogModule,
+    MatDialogModule,
+    NgbModule,
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true},
+    MessageService,
+    ConfirmationService
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
