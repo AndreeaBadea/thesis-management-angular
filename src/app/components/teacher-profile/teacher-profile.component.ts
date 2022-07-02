@@ -4,6 +4,9 @@ import {ProjectService} from "../../_services/project.service";
 import {TeacherService} from "../../_services/teacher.service";
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormGroup, NgForm} from "@angular/forms";
+import {User} from "../../models/user";
+import {Teacher} from "../../models/teacher";
+import {TeacherSkill} from "../../models/teacher-skill";
 
 
 @Component({
@@ -14,15 +17,18 @@ import {FormBuilder, FormGroup, NgForm} from "@angular/forms";
 export class TeacherProfileComponent implements OnInit {
 
   projects!: Project[];
-  project!: Project;
   selectedProjects!: Project[];
   cols!: any[];
   columns!: any[];
   closeResult!: string;
-  currentTeacherId!: number;
-  errorMessage!: any;
   editForm!: FormGroup;
+  editProfileForm! : FormGroup
   idProjectToDelete!: number;
+  retrivedUserObject!: User;
+  currentTeacher!: Teacher;
+  currentTeacherSkillsObject!: TeacherSkill
+  teacherSkill!: TeacherSkill;
+  currentTeacherId!: number;
 
   constructor(private projectService: ProjectService,
               private teacherService: TeacherService,
@@ -31,13 +37,16 @@ export class TeacherProfileComponent implements OnInit {
              ) { }
 
   ngOnInit(): void {
-    var retrivedUserObject = JSON.parse(<string>localStorage.getItem('auth-user'));
-    var idUserAccount = retrivedUserObject.idUserAccount;
+    this.retrivedUserObject = JSON.parse(<string>localStorage.getItem('auth-user'));
+    var idUserAccount = this.retrivedUserObject?.idUserAccount;
 
-    this.teacherService.getTeacherByIdUserAccount(idUserAccount).subscribe(data => {
+    this.teacherService.getTeacherByIdUserAccount(<number>idUserAccount).subscribe(data => {
       this.getAllProjects(data.idTeacher);
-      this.currentTeacherId = data.idTeacher;
+      this.currentTeacher = data;
+      this.getTeacherSkills(data.idTeacher);
+
     });
+
 
     this.cols = [
       {field: 'idProject', header: 'ID'},
@@ -52,33 +61,46 @@ export class TeacherProfileComponent implements OnInit {
       projectDescription: [''],
       projectAvailability: ['']
     })
+
+    this.editProfileForm = this.formBuilder.group({
+      skillsName: [''],
+      teachingSubjects: ['']
+    })
   }
 
   onSubmit(f: NgForm){
-    this.teacherService.addTeacherProject(this.currentTeacherId,  f.value).subscribe((result) => {
+    this.teacherService.addTeacherProject(this.currentTeacher.idTeacher,  f.value).subscribe((result) => {
       console.log(result.projectTitle);
       this.ngOnInit();
     });
     this.modalService.dismissAll();
     }
 
-    onSave(){
-    this.teacherService.updateTeacherProjects(this.currentTeacherId, this.editForm.value.idProject, this.editForm.value)
+  onSave(){
+    this.teacherService.updateTeacherProjects(this.currentTeacher.idTeacher, this.editForm.value.idProject, this.editForm.value)
       .subscribe((results) =>  {
         this.ngOnInit();
         this.modalService.dismissAll();
       })
     }
 
+    onSaveExperience(){
+    this.teacherService.updateTeacherSkill(this.currentTeacher.idTeacher, this.editProfileForm.value, this.currentTeacherSkillsObject.idTeachersSkills)
+      .subscribe((results) => {
+      this.ngOnInit();
+      this.modalService.dismissAll();
+      })
+    }
+
+
 
   getAllProjects(idTeacher:number){
     this.teacherService.getAllTeacherProjects(idTeacher).subscribe(data=> {
-      console.log(data);
       this.projects = data;
     })
   }
 
-    open(content: any) {
+  open(content: any) {
       this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
         this.closeResult = `Closed with: ${result}`;
       }, (reason) => {
@@ -97,6 +119,16 @@ export class TeacherProfileComponent implements OnInit {
       projectDescription: project.projectDescription,
       projectAvailability: project.projectAvailability
     });
+  }
+
+  openEditProfile(targetModal: any, teacherSkill: any){
+    this.modalService.open(targetModal, {
+      backdrop: 'static',
+      size: 'lg'
+    });
+    this.editProfileForm.patchValue({
+
+    })
   }
 
   openDelete(targetModal:any, project: any){
@@ -123,6 +155,13 @@ export class TeacherProfileComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
+
+
+  getTeacherSkills(idTeacher: number){
+    this.teacherService.getTeacherSkillByIdTeacher(idTeacher).subscribe(data => {
+      this.currentTeacherSkillsObject = data;
+    })
   }
 
 

@@ -1,9 +1,9 @@
 import {Injectable} from "@angular/core";
-import {BehaviorSubject, Observable} from "rxjs";
+import {Observable} from "rxjs";
 import {Project} from "../models/project";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {map} from "rxjs/operators";
 import {Teacher} from "../models/teacher";
+import {TeacherSkill} from "../models/teacher-skill";
 
 
 const API_URL = 'http://localhost:8080/';
@@ -45,6 +45,14 @@ export class TeacherService {
     return this.http.delete(API_URL + `teachers/projects/${idProject}`, httpOptions);
   }
 
+  public getTeacherSkillByIdTeacher(idTeacher: number): Observable<TeacherSkill>{
+    return this.http.get<TeacherSkill>(API_URL + `teachers/${idTeacher}/skills`, httpOptions);
+  }
+
+  public updateTeacherSkill(idTeacher: number, teacherSkill: TeacherSkill, idTeacherSkill: number): Observable<TeacherSkill>{
+    const body = JSON.stringify(teacherSkill);
+    return this.http.put<TeacherSkill>(API_URL + `teachers/${idTeacher}/skills/${idTeacherSkill}`,body, httpOptions);
+  }
 
 
 }
