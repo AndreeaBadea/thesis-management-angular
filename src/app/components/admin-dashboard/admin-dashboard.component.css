@@ -292,3 +292,8 @@ main {
   font-size: 1.5em;
   background: rgba(0, 0, 0, 0.08);
 }
+
+.btn{
+  width: 150px;
+  margin: 2px;
+}

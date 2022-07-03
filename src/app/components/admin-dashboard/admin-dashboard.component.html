@@ -160,6 +160,9 @@
                       {{rowData[col.field]}}
                     </td>
                     <td>
+                      <button type="button" class="btn btn-success" (click) = "giveTeacherRoleToUser(rowData)">MAKE TEACHER</button>
+                      <button type="button" class="btn btn-warning" (click) = "giveAdminRoleToUser(rowData)">MAKE ADMIN</button>
+                      <button type="button" class="btn btn-secondary">DEFAULT ROLE</button>
 
                     </td>
                     <td>

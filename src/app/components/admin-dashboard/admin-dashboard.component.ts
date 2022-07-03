@@ -101,6 +101,20 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
+  giveTeacherRoleToUser(user: any){
+    this.userService.giveTeacherRoleToUser(user.idUserAccount).subscribe((data) => {
+      console.log("UserAccount roles: " + data.roles);
+      this.ngOnInit();
+    })
+  }
+
+  giveAdminRoleToUser(user: any){
+    this.userService.giveAdminRoleToUser(user.idUserAccount).subscribe((data) => {
+      console.log("UserAccount roles: " + data.roles);
+      this.ngOnInit();
+    })
+  }
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';

@@ -27,5 +27,13 @@ export class UserService {
     return this.http.get<User[]>(API_URL + `admin/users`, httpOptions);
   }
 
+  public giveTeacherRoleToUser(idUserAccount: number): Observable<User>{
+    return this.http.post<User>(API_URL + `admin/${idUserAccount}/role/teacher`, httpOptions);
+  }
+
+  public giveAdminRoleToUser(idUserAccount: number): Observable<User>{
+    return this.http.post<User>(API_URL + `admin/${idUserAccount}/role/admin`, httpOptions);
+  }
+
 
 }
