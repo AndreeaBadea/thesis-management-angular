@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -38,7 +38,7 @@
           ></i>
           <div class="card_inner">
             <p class="text-primary-p">Registered Students</p>
-            <span class="font-bold text-title">578</span>
+            <span class="font-bold text-title">{{numberOfStudents}}</span>
           </div>
         </div>
 
@@ -46,7 +46,7 @@
           <i class="fa fa-users fa-2x text-red" aria-hidden="true"></i>
           <div class="card_inner">
             <p class="text-primary-p">Registered Teachers</p>
-            <span class="font-bold text-title">2467</span>
+            <span class="font-bold text-title">{{numberOfTeachers}}</span>
           </div>
         </div>
 
@@ -57,7 +57,7 @@
           ></i>
           <div class="card_inner">
             <p class="text-primary-p">Thesis Proposed</p>
-            <span class="font-bold text-title">340</span>
+            <span class="font-bold text-title">{{numberOfProposedThesis}}</span>
           </div>
         </div>
 
@@ -68,7 +68,7 @@
           ></i>
           <div class="card_inner">
             <p class="text-primary-p">Allocated Thesis</p>
-            <span class="font-bold text-title">645</span>
+            <span class="font-bold text-title">{{numberOfAllocatedThesis}}</span>
           </div>
         </div>
       </div>
@@ -82,15 +82,20 @@
               <h1>Manage Accounts</h1>
               <p>From here you can create new accounts, edit existing or delete.</p>
               <br>
-              <button type="button" class="button">
-                <span class="button__text">Show users accounts</span>
+              <button type="button" class="button" (click)="openAddUser(addUserContent)">
+                <span class="button__text">Add teacher account</span>
+                <span class="button__icon">
+                <ion-icon name="open-outline"></ion-icon>
+                </span>
+              </button>
+              <br>
+              <button type="button" class="button" (click)="openAddTeacher(addTeacherContent)">
+                <span class="button__text">Add teacher details</span>
                 <span class="button__icon">
                 <ion-icon name="open-outline"></ion-icon>
                 </span>
               </button>
               <script src="assets/open-outline.svg"></script>
-
-
               <br>
               <button type="button" class="button">
                 <span class="button__text">Show teachers table</span>
@@ -100,7 +105,6 @@
                 </span>
               </button>
               <script src="assets/open-outline.svg"></script>
-
 
               <br>
               <button type="button" class="button">
@@ -122,24 +126,160 @@
         <div class="charts__right">
           <div class="charts__right__title">
             <div>
-              <h1>Stats Reports</h1>
+              <h1>Users Accounts</h1>
+              <p-toolbar styleClass="p-mb-4">
+                <ng-template pTemplate="left">
+                  <button pButton pRipple label="Delete Selected" icon="pi pi-trash" class="p-button-danger" style="width:160px; padding:3px; background: #F59E0B; border: 1px solid #F59E0B; margin: 5px;" ></button>
+                </ng-template>
+              </p-toolbar>
 
+              <p-table #dt [columns] = "cols" [value]="users" [rows]="3" [paginator]="true"
+                       [(selection)]="selectedUsers" [rowHover]="true"   dataKey="idUserAccount"
+                       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
 
+                <ng-template pTemplate="header" let-columns>
+                  <tr>
+                    <th style="width: 2.25em">
+                      <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
+                    <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                      {{col.header}}
+                      <p-sortIcon [field]="col.field"></p-sortIcon>
+                    </th>
+                    <th>Permission</th>
+                    <th>Action</th>
+                  </tr>
+                </ng-template>
 
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                  <tr>
+                    <td>
+                      <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                    </td>
+                    <td *ngFor="let col of columns">
+                      {{rowData[col.field]}}
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+                      <button pButton pRipple icon="pi pi-pencil"class="p-button-rounded p-button-success p-mr-2" ></button>
+                      <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" ></button>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
             </div>
-            <i class="fa fa-usd" aria-hidden="true"></i>
+
+
+
           </div>
+        </div>
+
+<!--          OPEN MODALS-->
+
+          <ng-template #addUserContent let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">New User</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form #f="ngForm" (ngSubmit)="onSubmitUser(f)" novalidate>
+                <div class="form-group">
+                  <label for="username">Username</label>
+                  <div class="input-group">
+                    <input id="username" name="username" class="form-control" ngModel>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <div class="input-group">
+                    <input id="password" name="password" class="form-control" ngModel>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="roles">Email</label>
+                  <div class="input-group">
+                    <input id="email" name="email" class="form-control" ngModel>
+                  </div>
+                </div>
+
+                <div class="border text-center">
+                  <button data-dismiss="modal" class="btn btn-info">Submit</button>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+            </div>
+          </ng-template>
+
+
+          <ng-template #addTeacherContent let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modalTeacher-basic-title">Add teacher details</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form #f="ngForm" (ngSubmit)="onSubmitTeacher(f)" novalidate>
+                <div class="form-group">
+                  <label for="idUserAccount">ID user account</label>
+                  <div class="input-group">
+                    <input id="idUserAccount" name="idUserAccount" class="form-control" ngModel>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="firstName">First Name</label>
+                  <div class="input-group">
+                    <input id="firstName" name="firstName" class="form-control" ngModel>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="lastName">Last Name</label>
+                  <div class="input-group">
+                    <input id="lastName" name="lastName" class="form-control" ngModel>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="cnp">CNP</label>
+                  <div class="input-group">
+                    <input id="cnp" name="cnp" class="form-control" ngModel>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="numberOfStudents">Number of Students</label>
+                  <div class="input-group">
+                    <input id="numberOfStudents" name="numberOfStudents" class="form-control" ngModel>
+                  </div>
+                </div>
+
+                <div class="border text-center">
+                  <button data-dismiss="modal" class="btn btn-info">Submit</button>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+            </div>
+          </ng-template>
+
+
+
 
           <div class="charts__right__cards">
-
           </div>
         </div>
       </div>
       <!-- CHARTS ENDS HERE -->
-    </div>
   </main>
-  </div>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+</div>
+
 </body>
+
 </html>

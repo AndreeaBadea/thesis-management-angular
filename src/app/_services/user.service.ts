@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from "../models/user";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
 
 const API_URL = 'http://localhost:8080/';
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
@@ -15,11 +18,14 @@ export class UserService {
     return this.http.get(API_URL + '/users/all', { responseType: 'text' });
   }
 
-  getAll() {
-    return this.http.get<User[]>(`${environment.apiUrl}/users`);
+  public addUserAccount(user: User): Observable<User>{
+    const body = JSON.stringify(user);
+    return this.http.post<User>(API_URL + `admin/register`, body, httpOptions);
   }
 
-  getById(id: number | undefined) {
-    return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
+  public getAllUsersAccounts(): Observable<User[]>{
+    return this.http.get<User[]>(API_URL + `admin/users`, httpOptions);
   }
+
+
 }

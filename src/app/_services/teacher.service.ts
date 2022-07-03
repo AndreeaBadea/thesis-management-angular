@@ -54,5 +54,15 @@ export class TeacherService {
     return this.http.put<TeacherSkill>(API_URL + `teachers/${idTeacher}/skills/${idTeacherSkill}`,body, httpOptions);
   }
 
+  public addTeacher(idUserAccount: number, teacher: Teacher): Observable<Teacher>{
+    const body = JSON.stringify(teacher);
+    return this.http.post<Teacher>(API_URL + `admin/${idUserAccount}/teachers`, body, httpOptions);
+  }
+
+  public getAllTeachers():Observable<Teacher[]>{
+    return this.http.get<Teacher[]>(API_URL + `teachers`, httpOptions);
+  }
+
+
 
 }

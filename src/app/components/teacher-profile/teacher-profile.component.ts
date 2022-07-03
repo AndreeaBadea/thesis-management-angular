@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Project} from "../../models/project";
-import {ProjectService} from "../../_services/project.service";
+import {ProjectService} from "../../_helpers/project.service";
 import {TeacherService} from "../../_services/teacher.service";
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FormBuilder, FormGroup, NgForm} from "@angular/forms";
