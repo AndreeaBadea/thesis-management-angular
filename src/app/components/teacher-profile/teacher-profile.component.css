@@ -25,6 +25,9 @@
   padding: 0;
 }
 
+
+
+
 body {
   box-sizing: border-box;
   font-family: "Lato", sans-serif;
@@ -170,9 +173,7 @@ main {
 /*}*/
 
 
-.p-datatable .p-datatable-thead > tr > th {
 
-}
 
 .p-input-icon-left, .p-input-icon-right {
   position: relative;
@@ -186,6 +187,11 @@ main {
   column-gap: 110px;
 }
 
+/*p-table {*/
+/*  cdk-virtual-scroll-viewport {*/
+/*    overflow-y: scroll !important;*/
+/*}*/
+/*      }*/
 
 
 /*CARD USER PROFILE INFO*/
@@ -343,4 +349,13 @@ h6 {
   font-weight: 600;
   color: #6c757d;
   cursor: pointer;
+}
+
+.p-button.p-button-success{
+ background: #14690b;
+  border: #76ad6a;
+}
+
+.p-button.p-button-success .p-buttonset.p-button-success > .p-button, .p-splitbutton.p-button-success > .p-button{
+
 }

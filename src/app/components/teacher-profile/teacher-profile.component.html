@@ -22,7 +22,7 @@
 <!--          <div class="charts__left__title">-->
 <!--            <div>-->
 <!--            <h1>Profile</h1>-->
-             <div class="caca">
+             <div class="caca" style="width:900px">
 <!--               <div>-->
 <!--                 <h1>Profile</h1>-->
 <!--                <div class="charts__left__title">-->
@@ -103,7 +103,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <form [formGroup]="editProfileForm" novalidate>
+              <form [formGroup]="editProfileForm"  novalidate>
                 <div class="form-group">
                   <label for="skillsName">Skills</label>
                   <div class="input-group">
@@ -127,17 +127,17 @@
 
         <div class="charts__right">
           <div class="charts__right__title">
-            <div>
+            <div style="width:900px">
               <h1>Proposed Thesis</h1>
               <p-toolbar styleClass="p-mb-4">
                 <ng-template pTemplate="left">
-                  <button pButton pRipple label="Add" icon="pi pi-plus" class="p-button-success p-mr-2" (click) = open(content)></button>
-                  <button pButton pRipple label="Delete Selected" icon="pi pi-trash" class="p-button-danger" ></button>
+                  <button pButton pRipple label="Add" icon="pi pi-plus" class="p-button-success p-mr-2" style="width:80px; padding:3px; margin: 5px;" (click) = open(content)></button>
+                  <button pButton pRipple label="Delete Selected" icon="pi pi-trash" class="p-button-danger" style="width:160px; padding:3px; background: #F59E0B; border: 1px solid #F59E0B; margin: 5px;" ></button>
                 </ng-template>
               </p-toolbar>
 
               <p-table #dt [columns] = "cols" [value]="projects" [rows]="10" [paginator]="true" [globalFilterFields]="['title','status']"
-                       [(selection)]="selectedProjects" [rowHover]="true" dataKey="idProject"
+                       [(selection)]="selectedProjects" [rowHover]="true"   dataKey="idProject"
                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
 
 
