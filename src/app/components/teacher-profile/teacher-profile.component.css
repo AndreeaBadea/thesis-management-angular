@@ -238,9 +238,10 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  height: 80px;
-  padding: 25px;
-  border-radius: 5px;
+  height: 500px;
+  width: 850px;
+  padding: 20px;
+  /*border-radius: 5px;*/
   background: #ffffff;
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
@@ -248,8 +249,8 @@ main {
 
 .user-profile {
   padding: 20px 0;
-  height: 400px;
-  width: 200px;
+  height: 450px;
+  width: 10px;
 }
 
 .card-block {
