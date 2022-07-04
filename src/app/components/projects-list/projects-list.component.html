@@ -1,4 +1,3 @@
-<!--<div class="container">-->
 <p-table #dtSearch
          [columns]="cols"
          [value]="projects"
@@ -7,7 +6,6 @@
          [rows]="10"
          [(selection)]="selectedProject"
          [resizableColumns]="true"
-         [scrollable]="true"
          columnResizeMode="expand"
          styleClass="p-datatable-lg"
          responsiveLayout="scroll"
@@ -18,7 +16,7 @@
     <h2>Projects</h2>
     <div class="ui-helper-clearfix" style="text-align: left">
       <button type="button" pButton icon="pi pi-file" iconPos="left" pTooltip="CSV" tooltipPosition="bottom" (click)="dt.exportCSV()" ></button>
-      <button type="button" pButton icon="pi pi-file-excel" iconPos="left" pTooltip="EXCEL" tooltipPosition="bottom" (click)="exportExcel()"  class="p-button-success"></button>
+<!--      <button type="button" pButton icon="pi pi-file-excel" iconPos="left" pTooltip="EXCEL" tooltipPosition="bottom" (click)="exportExcel()"  class="p-button-success"></button>-->
       <button type="button" pButton icon="pi pi-file-pdf" iconPos="left" pTooltip="PDF" tooltipPosition="bottom" (click)="exportPdf()" class="p-button-warning"></button>
 
       <span class="p-input-icon-right ">
@@ -27,6 +25,7 @@
                 </span>
     </div>
   </ng-template>
+
   <ng-template pTemplate="header" let-columns>
     <tr>
       <th style="width: 2.25em">
@@ -36,6 +35,7 @@
         {{col.header}}
         <p-sortIcon [field]="col.field"></p-sortIcon>
       </th>
+      <th>Action</th>
     </tr>
   </ng-template>
 
@@ -46,6 +46,9 @@
       </td>
       <td *ngFor="let col of columns">
         {{rowData[col.field]}}
+      </td>
+      <td>
+        <button type="button" [disabled] = !isProjectAvailable(rowData) (click)="onClick(rowData)" class="btn btn-success" >REQUEST PROJECT</button>
       </td>
     </tr>
   </ng-template>
