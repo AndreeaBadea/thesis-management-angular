@@ -23,7 +23,6 @@ export class UserDetailsFormComponent implements OnInit {
               private activatedRoute : ActivatedRoute) { }
 
   ngOnInit(): void {
-    console.log("aiiici");
 
     this.activatedRoute.params.subscribe(params => {
       // this.idUser = parseInt(<string>this.activatedRoute.snapshot.params.get('id'));
@@ -45,6 +44,7 @@ export class UserDetailsFormComponent implements OnInit {
 
   onSubmit(){
      this.student = {
+       idStudent: 0, ////!!
       idUserAccount: this.idUser,
       firstName: this.userDetailsForm.value.firstName,
       lastName: this.userDetailsForm.value.lastName,

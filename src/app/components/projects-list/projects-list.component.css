@@ -15,5 +15,22 @@
   float: right;
 }
 
+.width-container {
+  padding: 0px;
+  max-width: 1900px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
 
 
+/*@media (min-width: 992px)*/
+/*.container, .container-lg, .container-md, .container-sm, .container-xl {*/
+/*  max-width: 1900px;*/
+
+/*}*/
+
+  @media (min-width: 1200px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl {
+        max-width: 1900px;
+    }
+    }

@@ -63,6 +63,10 @@ const routes: Routes = [
     path:'teacher-profile',
     component: TeacherProfileComponent,
   },
+  {
+    path:'student-profile',
+    component: StudentProfileComponent,
+  },
   { path: '**',
     redirectTo: 'home',
     pathMatch: 'full'

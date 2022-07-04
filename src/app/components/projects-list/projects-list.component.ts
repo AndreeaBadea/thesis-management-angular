@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Project} from "../../models/project";
-import {ProjectService} from "../../_helpers/project.service";
+import {ProjectService} from "../../_services/project.service";
 
 @Component({
   selector: 'app-projects-list',
@@ -17,26 +17,27 @@ export class ProjectsListComponent implements OnInit {
   constructor(private projectService : ProjectService) { }
 
   ngOnInit(): void {
-    this.projects = this.projectService.getAllProjects();
+    // this.projects = this.projectService.getAllProjects();
 
     this.cols = [
       {field: 'idProject', header: 'ID'},
       {field: 'projectTitle', header:'Project title'},
       {field: 'projectDescription', header:'Project description'},
       {field: 'teacherName', header: 'Teacher name'},
-      {field: 'projectAvailability', header: 'Project availability'}
+      {field: 'projectAvailability', header: 'Project availability'},
+      {field: 'requestProject', header: 'Action'}
     ];
   }
 
 
-  getProjects() {
-    let projects = [];
-    for(let project of this.projects) {
-      //student.year = car.year.toString();
-      projects.push(project);
-    }
-    return projects;
-  }
+  // getProjects() {
+  //   let projects = [];
+  //   for(let project of this.projects) {
+  //     //student.year = car.year.toString();
+  //     projects.push(project);
+  //   }
+  //   return projects;
+  // }
 
 
 

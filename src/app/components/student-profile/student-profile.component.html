@@ -18,17 +18,100 @@
     <div class="main__cards">
       <!-- CHARTS STARTS HERE -->
       <div class="charts">
-        <div class="charts__left">
-          <div class="charts__left__title">
-            <div>
-              <h1>Your Profile</h1>
-              <p>From here you can create new accounts, edit existing or delete.</p>
-              <br>
+        <div class="profile-card" style="width:900px">
+          <div class="col-sm-3 bg-c-lite-green user-profile">
+            <div class="card-block text-center text-white">
+              <div class="m-b-25">
+                <img src="assets/teacher-avatar.svg" alt="User-Profile-Image">
+              </div>
+              <h6 class="f-w-600">{{currentStudent.firstName}} {{currentStudent.lastName}}</h6>
+              <p>Student</p>
+              <br><br><br><br><br><br>
+              <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" (click)="openEditProfile(contentEditProfile, currentStudentSkillsObject)"    />
+            </div>
+          </div>
+          <div class="col-sm-8">
+            <div class="card-block">
+              <h6 class="m-b-20 p-b-5 b-b-default f-w-600">INFORMATIONS</h6>
+              <div class="row">
+                <div class="col-sm-6">
+                  <p class="m-b-10 f-w-600">Email</p>
+                  <h6 class="text-muted f-w-400">{{retrivedUserObject.email}}</h6>
+                </div>
+                <div class="col-sm-6">
+                  <p class="m-b-10 f-w-600">Classroom</p>
+                  <h6 class="text-muted f-w-400">{{currentStudent.classroom}}</h6>
+                </div>
+              </div>
+              <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">UNIVERSITY</h6>
+              <div class="row">
+                <div class="col-sm-6">
+                  <p class="m-b-10 f-w-600">Faculty</p>
+                  <h6 class="text-muted f-w-400">{{currentStudent.faculty}}</h6>
+                </div>
+                <div class="col-sm-6">
+                  <p class="m-b-10 f-w-600">Faculty Domain </p>
+                  <h6 class="text-muted f-w-400">{{currentStudent.facultyDomain}}</h6>
+                </div>
+              </div>
 
-
+              <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">EXPERIENCE</h6>
+              <div class="row">
+                <div class="col-sm-6">
+                  <p class="m-b-10 f-w-600">Skills</p>
+                  <h6 class="text-muted f-w-400">{{currentStudentSkillsObject.skillsName}}</h6>
+                </div>
+                <div class="col-sm-6">
+                  <p class="m-b-10 f-w-600">Favourite subjects</p>
+                  <h6 class="text-muted f-w-400">{{currentStudentSkillsObject.favouriteSubjects}}</h6>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2">
             </div>
           </div>
         </div>
+
+
+        <!--            EDIT PROFILE MODAL AND FORM-->
+        <ng-template #contentEditProfile let-modal>
+          <div class="modal-header">
+            <h4 class="modalEdit-title" id="modalEditProfile-basic-title">Edit Experience Informations</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="editProfileForm"  novalidate>
+              <div class="form-group">
+                <label>Skills</label>
+                <div class="input-group">
+                  <input formControlName="skillsName" class="form-control">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Favourite subjects</label>
+                <div class="input-group">
+                  <input formControlName="favouriteSubjects" class="form-control">
+                </div>
+              </div>
+              <div class="border text-center">
+                <button data-dismiss="modal" class="btn btn-info"  (click)=onSaveExperience()>Save Changes</button>
+              </div>
+            </form>
+          </div>
+        </ng-template>
+        <!--THE END OF EDIT PROFILE MODAL FORM-->
+
+
+        <div class="charts__right">
+          <div class="charts__right__title">
+            <div style="width:900px">
+            </div>
+          </div>
+        </div>
+
+
       </div>
     </div>
   </main>
