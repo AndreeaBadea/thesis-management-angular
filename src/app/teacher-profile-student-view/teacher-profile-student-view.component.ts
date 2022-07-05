@@ -11,6 +11,8 @@ import {StudentService} from "../_services/students.service";
 import {Student} from "../models/student";
 import {CoordinatedStudent} from "../_helpers/coordinated-student";
 import {CoordinatedStudentService} from "../_helpers/coordinated.student.service";
+import {Meeting} from "../models/meeting";
+import {MeetingsService} from "../_helpers/meetings.service";
 
 @Component({
   selector: 'app-teacher-profile-student-view',
@@ -30,14 +32,17 @@ export class TeacherProfileStudentViewComponent implements OnInit {
   currentTeacherId!: number;
   coordinatedStudents!:  CoordinatedStudent[];
   coordinatedStudentsCols!: any[];
+  meetingsCols!: any[];
   currentStudent!: Student;
   idCurrentUserAccount!: number;
+  meetings!: Meeting[];
 
   constructor(private projectService: ProjectService,
               private teacherService: TeacherService,
               private studentService: StudentService,
               private coordinatedStudentsService: CoordinatedStudentService,
               private modalService: NgbModal,
+              private meetingService: MeetingsService,
               private formBuilder: FormBuilder
   ) { }
 
@@ -50,6 +55,7 @@ export class TeacherProfileStudentViewComponent implements OnInit {
       this.currentTeacher = data;
       this.getTeacherSkills(data.idTeacher);
       this.coordinatedStudents = this.coordinatedStudentsService.getAllCoordinatedStudents();
+      this.meetings = this.meetingService.getAllMeetings();
 
     });
 
@@ -69,6 +75,14 @@ export class TeacherProfileStudentViewComponent implements OnInit {
       {field: 'projectTitle', header: 'Allocated Project'}
     ]
 
+    this.meetingsCols = [
+      {field: 'idMeeting', header: 'ID'},
+      {field: 'date', header: 'Date'},
+      {field: 'hour', header: 'Hour'},
+      {field: 'participantName', header: 'Participant'},
+      {field: 'meetingSubject', header: 'Meeting Subject'}
+    ]
+
   }
 
   onSubmit(f: NgForm){
@@ -77,6 +91,11 @@ export class TeacherProfileStudentViewComponent implements OnInit {
       this.ngOnInit();
     });
     this.modalService.dismissAll();
+  }
+
+
+  OnSendProposal(f: NgForm){
+    console.log("Proposal text:" + f.value);
   }
 
 

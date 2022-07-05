@@ -71,7 +71,7 @@
             <p-toolbar styleClass="p-mb-4">
               <ng-template pTemplate="left">
                 <button pButton pRipple label="Send proposed thesis" icon="pi pi-trash" class="p-button-danger"
-                        style="width:160px; padding:3px; background: #F59E0B; border: 1px solid #F59E0B; margin: 5px;"></button>
+                        style="width:160px; padding:3px; background: #F59E0B; border: 1px solid #F59E0B; margin: 5px;" (click)="open(content)"></button>
               </ng-template>
             </p-toolbar>
 
@@ -89,8 +89,6 @@
                   <th>Action</th>
                 </tr>
               </ng-template>
-
-
               <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
                   <td *ngFor="let col of columns">
@@ -107,6 +105,32 @@
           </div>
         </div>
       </div>
+
+<!--      OPEN MODAL FOR REQUEST OWN PROJECT-->
+      <ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Send your own idea!</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form #f="ngForm" (ngSubmit)="OnSendProposal(f)" novalidate>
+            <div class="form-group">
+              <label for="projectProposalText">Write your idea here..</label>
+              <div class="input-group">
+                <input id="projectProposalText" name="projectProposalText" class="form-control" ngModel>
+              </div>
+            </div>
+            <div class="border text-center">
+              <button data-dismiss="modal" class="btn btn-info">Send</button>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+        </div>
+      </ng-template>
 
 
       <div class="charts__right" style="width:900px">
@@ -139,11 +163,35 @@
           </div>
         </div>
       </div>
-
+<!--      #6cb26c-->
       <div class="charts__right">
         <div class="charts__right__title">
           <div>
-            <h4>Coordinated Students</h4>
+            <h4>Scheduled Meetings</h4>
+            <p-table #dt [columns]="meetingsCols" [value]="meetings" [rows]="3"
+                     [paginator]="true"
+                     [rowHover]="true" dataKey="idMeeting"
+                     currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                     [showCurrentPageReport]="true">
+
+              <ng-template pTemplate="header" let-columns>
+                <tr>
+                  <th *ngFor="let col of columns" [pSortableColumn]="col.field" style="background: #ef9a14">
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                  </th>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr>
+                  <td *ngFor="let col of columns">
+                    {{rowData[col.field]}}
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+
           </div>
         </div>
 
