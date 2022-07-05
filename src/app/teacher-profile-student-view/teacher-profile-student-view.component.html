@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+    crossorigin="anonymous"
+  />
+  <title>Profile</title>
+</head>
+<body id="body">
+
+<div class="container">
+  <main>
+    <div class="main__cards">
+      <!-- CHARTS STARTS HERE -->
+      <div class="charts">
+        <div class="card-profile" style="width:900px">
+          <div class="col-sm-3 bg-c-lite-green user-profile">
+            <div class="card-block text-center text-white">
+              <div class="m-b-25">
+                <img src="assets/teacher-avatar.svg" alt="User-Profile-Image">
+              </div>
+              <h6 class="f-w-600">{{currentTeacher.firstName}} {{currentTeacher.lastName}}</h6>
+              <p>Teacher</p>
+            </div>
+          </div>
+
+
+          <div class="col-sm-8">
+            <div class="card-block">
+              <h6 class="m-b-20 p-b-5 b-b-default f-w-600">INFORMATIONS</h6>
+              <div class="row">
+                <div class="col-sm-6">
+                  <p class="m-b-10 f-w-600">Email</p>
+                  <h6 class="text-muted f-w-400">{{retrivedUserObject.email}}</h6>
+                </div>
+              </div>
+              <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">COORDINATING DETAILS</h6>
+              <div class="row">
+                <div class="col-sm-6">
+                  <p class="m-b-10 f-w-600">Total number of students</p>
+                  <h6 class="text-muted f-w-400">{{currentTeacher.numberOfStudents}}</h6>
+                </div>
+                <div class="col-sm-6">
+                  <p class="m-b-10 f-w-600">Remaining available</p>
+                  <h6 class="text-muted f-w-400">4</h6>
+                </div>
+              </div>
+
+              <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">EXPERIENCE</h6>
+              <div class="row">
+                <div class="col-sm-6">
+                  <p class="m-b-10 f-w-600">Skills</p>
+                  <h6 class="text-muted f-w-400">{{currentTeacherSkillsObject.skillsName}}</h6>
+                </div>
+                <div class="col-sm-6">
+                  <p class="m-b-10 f-w-600">Teaching Subjects</p>
+                  <h6 class="text-muted f-w-400">{{currentTeacherSkillsObject.teachingSubjects}}</h6>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-md-2">
+              <!--                    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile" (click)="openEditProfile(contentEditProfile, currentTeacherSkillsObject)"/>-->
+            </div>
+          </div>
+
+        </div>
+
+        <div class="charts__right">
+          <div class="charts__right__title">
+            <div style="width:900px">
+              <h1>Proposed Thesis</h1>
+              <p-toolbar styleClass="p-mb-4">
+                <ng-template pTemplate="left">
+                  <button pButton pRipple label="Send proposed thesis" icon="pi pi-trash" class="p-button-danger"
+                          style="width:160px; padding:3px; background: #F59E0B; border: 1px solid #F59E0B; margin: 5px;"></button>
+                </ng-template>
+              </p-toolbar>
+
+              <p-table #dt [columns]="cols" [value]="projects" [rows]="10" [paginator]="true"
+                       [globalFilterFields]="['title','status']"
+                       [rowHover]="true" dataKey="idProject"
+                       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                       [showCurrentPageReport]="true">
+                <ng-template pTemplate="header" let-columns>
+                  <tr>
+                    <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                      {{col.header}}
+                      <p-sortIcon [field]="col.field"></p-sortIcon>
+                    </th>
+                    <th>Action</th>
+                  </tr>
+                </ng-template>
+
+
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                  <tr>
+                    <td *ngFor="let col of columns">
+                      {{rowData[col.field]}}
+                    </td>
+                    <td>
+                      <button type="button" [disabled]=!isProjectAvailable(rowData) (click)="onClick(rowData)"
+                              class="btn btn-success">REQUEST PROJECT
+                      </button>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
+            <div class="cards_down">
+              <div class="charts_down_right">
+                <div class="charts_down_right_title">
+                  <div>
+                    <h1>Coordinated Students</h1>
+
+                    <p-table #dt [columns]="coordinatedStudentsCols" [value]="coordinatedStudents" [rows]="3"
+                             [paginator]="true"
+                             [rowHover]="true" dataKey="idCoordinatedStudent"
+                             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                             [showCurrentPageReport]="true">
+
+                      <ng-template pTemplate="header" let-columns>
+                        <tr>
+                          <th *ngFor="let col of columns" [pSortableColumn]="col.field" style="background: chocolate">
+                            {{col.header}}
+                            <p-sortIcon [field]="col.field"></p-sortIcon>
+                          </th>
+                        </tr>
+                      </ng-template>
+
+                      <ng-template pTemplate="body" let-rowData let-columns="columns">
+                        <tr>
+                          <td *ngFor="let col of columns">
+                            {{rowData[col.field]}}
+                          </td>
+                        </tr>
+                      </ng-template>
+                    </p-table>
+
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>
+

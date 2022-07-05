@@ -10,6 +10,7 @@ import {TeacherProfileComponent} from "./components/teacher-profile/teacher-prof
 import {UserDetailsFormComponent} from "./components/user-details-form/user-details-form.component";
 import {AdminDashboardComponent} from "./components/admin-dashboard/admin-dashboard.component";
 import {StudentProfileComponent} from "./components/student-profile/student-profile.component";
+import {TeacherProfileStudentViewComponent} from "./teacher-profile-student-view/teacher-profile-student-view.component";
 
 const routes: Routes = [
   {
@@ -66,6 +67,10 @@ const routes: Routes = [
   {
     path:'student-profile',
     component: StudentProfileComponent,
+  },
+  {
+    path:'teacher-profile-student-view',
+    component: TeacherProfileStudentViewComponent,
   },
   { path: '**',
     redirectTo: 'home',

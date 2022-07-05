@@ -33,6 +33,7 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {MatDialogModule} from "@angular/material/dialog";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TeacherProfileStudentViewComponent } from './teacher-profile-student-view/teacher-profile-student-view.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     TeacherProfileComponent,
     UserDetailsFormComponent,
     StudentProfileComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
+    TeacherProfileStudentViewComponent
   ],
   imports: [
     BrowserModule,
