@@ -139,8 +139,6 @@
               <p-table #dt [columns] = "cols" [value]="projects" [rows]="10" [paginator]="true" [globalFilterFields]="['title','status']"
                        [(selection)]="selectedProjects" [rowHover]="true"   dataKey="idProject"
                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
-
-
                 <ng-template pTemplate="header" let-columns>
                   <tr>
                     <th style="width: 2.25em">
@@ -285,11 +283,64 @@
                 <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
               </div>
             </ng-template>
-
-
-
           </div>
         </div>
+
+        <div class = "cards_down">
+        <div class="charts_down_right">
+          <div class="charts_down_right_title">
+            <div >
+              <h1>Thesis Requests</h1><p-toolbar styleClass="p-mb-4">
+              <ng-template pTemplate="left">
+                <button pButton pRipple label="Delete Selected" icon="pi pi-trash" class="p-button-danger" style="width:160px; padding:3px; background: #F59E0B; border: 1px solid #F59E0B; margin: 5px;" ></button>
+              </ng-template>
+            </p-toolbar>
+
+              <p-table #dt [columns] = "projectRequestCols" [value]="projectRequests" [rows]="3" [paginator]="true"
+                       [(selection)]="selectedProjectRequests" [rowHover]="true"   dataKey="idProjectRequest"
+                       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true">
+
+                <ng-template pTemplate="header" let-columns>
+                  <tr>
+                    <th style="width: 2.25em">
+                      <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
+                    <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                      {{col.header}}
+                      <p-sortIcon [field]="col.field"></p-sortIcon>
+                    </th>
+                    <th>Accept Request</th>
+                  </tr>
+                </ng-template>
+
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                  <tr>
+                    <td>
+                      <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                    </td>
+                    <td *ngFor="let col of columns">
+                      {{rowData[col.field]}}
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-success" (click) = "onYes(rowData)" >YES</button>
+                      <button type="button" class="btn btn-warning" >NO</button>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
+        </div>
+<!--          <div class="charts_down_left">-->
+<!--            <div class="charts_down_left_title">-->
+<!--              <div style="width:600px">-->
+<!--                <h1>Schedule a meeting</h1>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+        </div>
+
+
       </div>
     </div>
   </main>

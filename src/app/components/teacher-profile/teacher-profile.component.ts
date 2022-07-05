@@ -7,6 +7,7 @@ import {FormBuilder, FormGroup, NgForm} from "@angular/forms";
 import {User} from "../../models/user";
 import {Teacher} from "../../models/teacher";
 import {TeacherSkill} from "../../models/teacher-skill";
+import {ProjectRequest} from "../../models/project-request";
 
 
 @Component({
@@ -29,6 +30,10 @@ export class TeacherProfileComponent implements OnInit {
   currentTeacherSkillsObject!: TeacherSkill
   teacherSkill!: TeacherSkill;
   currentTeacherId!: number;
+  projectRequests!:  ProjectRequest[];
+  selectedProjectRequests! : ProjectRequest[];
+  projectRequestCols!: any[];
+  hideRow: boolean = false;
 
   constructor(private projectService: ProjectService,
               private teacherService: TeacherService,
@@ -44,6 +49,7 @@ export class TeacherProfileComponent implements OnInit {
       this.getAllProjects(data.idTeacher);
       this.currentTeacher = data;
       this.getTeacherSkills(data.idTeacher);
+      this.getProjectRequestsOfTeacher(data.idTeacher);
 
     });
 
@@ -54,6 +60,13 @@ export class TeacherProfileComponent implements OnInit {
       {field: 'projectDescription', header:'Description'},
       {field: 'projectAvailability', header: 'Status'}
     ];
+
+
+    this.projectRequestCols = [
+      {field:'idProjectRequest', header: 'ID'},
+      {field: 'studentName', header: 'Student Name'},
+      {field: 'projectTitle', header: 'Project Requested'}
+    ]
 
     this.editForm = this.formBuilder.group({
       idProject: [''],
@@ -97,6 +110,12 @@ export class TeacherProfileComponent implements OnInit {
   getAllProjects(idTeacher:number){
     this.teacherService.getAllTeacherProjects(idTeacher).subscribe(data=> {
       this.projects = data;
+    })
+  }
+
+  getProjectRequestsOfTeacher(idTeacher: number){
+    this.teacherService.getProjectRequestsOfTeacher(idTeacher).subscribe(data =>{
+      this.projectRequests = data;
     })
   }
 
@@ -164,5 +183,23 @@ export class TeacherProfileComponent implements OnInit {
     })
   }
 
+  allocateProject(projectRequest: ProjectRequest){
+    this.teacherService.allocateProject( projectRequest.idProjectRequest).subscribe(data =>{
+      this.ngOnInit();
+      this.hideRow = true;
+      console.log("Project id" + projectRequest.project.idProject + " was allocated!");
+    })
+  }
+
+  deleteProjectRequest(idProjectRequest: number){
+    this.teacherService.deleteTeacherProject(idProjectRequest).subscribe(data=>{
+      this.ngOnInit();
+    })
+  }
+
+  onYes(projectRequest: any){
+    this.allocateProject(projectRequest);
+    // this.deleteProjectRequest(projectRequest.idProjectRequest)
+  }
 
 }

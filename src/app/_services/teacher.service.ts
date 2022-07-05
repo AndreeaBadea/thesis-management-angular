@@ -4,6 +4,7 @@ import {Project} from "../models/project";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Teacher} from "../models/teacher";
 import {TeacherSkill} from "../models/teacher-skill";
+import {ProjectRequest} from "../models/project-request";
 
 
 const API_URL = 'http://localhost:8080/';
@@ -63,6 +64,17 @@ export class TeacherService {
     return this.http.get<Teacher[]>(API_URL + `teachers`, httpOptions);
   }
 
+  public getProjectRequestsOfTeacher(idTeacher: number): Observable<ProjectRequest[]>{
+    return this.http.get<ProjectRequest[]>(API_URL + `teachers/${idTeacher}/requests`, httpOptions);
+  }
+
+  public allocateProject(idProjectRequest : number): Observable<ProjectRequest>{
+    return this.http.post<ProjectRequest>(API_URL + `teachers/requests/${idProjectRequest}/allocate`, httpOptions);
+  }
+
+  public deleteProjectRequest(idProjectRequest: number): Observable<void>{
+    return this.http.delete<void>(API_URL + `teachers/requests/${idProjectRequest}`, httpOptions);
+  }
 
 
 }

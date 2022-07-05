@@ -78,6 +78,13 @@ main {
   margin-top: 50px;
 }
 
+.cards_down {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-top: 50px;
+}
+
 .charts__left {
   padding: 25px;
   height: 500px;
@@ -123,6 +130,22 @@ main {
   box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
 }
 
+.charts_down_right {
+  padding: 25px;
+  border-radius: 5px;
+  width:936px;
+  background: #ffffff;
+  box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
+}
+
+.charts_down_left {
+  padding: 25px;
+  border-radius: 5px;
+  width:936px;
+  background: #ffffff;
+  box-shadow: 5px 5px 13px #ededed, -5px -5px 13px #ffffff;
+}
+
 .charts__right__title {
   display: flex;
   align-items: center;
@@ -142,6 +165,28 @@ main {
 }
 
 .charts__right__title > i {
+  color: #ffffff;
+  font-size: 20px;
+  background: #39447a;
+  border-radius: 200px 0px 200px 200px;
+  -moz-border-radius: 200px 0px 200px 200px;
+  -webkit-border-radius: 200px 0px 200px 200px;
+  border: 0px solid #000000;
+  padding: 15px;
+}
+
+.charts_down_right_title > i {
+  color: #ffffff;
+  font-size: 20px;
+  background: #39447a;
+  border-radius: 200px 0px 200px 200px;
+  -moz-border-radius: 200px 0px 200px 200px;
+  -webkit-border-radius: 200px 0px 200px 200px;
+  border: 0px solid #000000;
+  padding: 15px;
+}
+
+.charts_down_left_title > i {
   color: #ffffff;
   font-size: 20px;
   background: #39447a;
