@@ -18,9 +18,9 @@ private coordinatedStudents: CoordinatedStudent[] = [
   },
   {
     'idCoordinatedStudent' : 2,
-    'studentName': 'Cristian Popescu',
+    'studentName': 'Andreea Badea',
     'classRoom': '342B3',
-    'projectTitle': 'Aplicatie pentru Supermarket'
+    'projectTitle': 'Dezvoltarea unei aplicatii de gestionare a temelor de licenta intr-o facultate'
   },
 
 ];
